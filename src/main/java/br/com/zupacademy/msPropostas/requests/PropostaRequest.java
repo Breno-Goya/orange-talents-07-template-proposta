@@ -38,4 +38,8 @@ public class PropostaRequest {
     public Proposta convertToModel() {
         return new Proposta(documento, email, nome, endereco, salario);
     }
+
+    public String getDocumento() {
+        return documento;
+    }
 }
