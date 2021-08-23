@@ -1,5 +1,7 @@
 package br.com.zupacademy.msPropostas.entities;
 
+import br.com.zupacademy.msPropostas.clients.status.StatusProposta;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -20,6 +22,9 @@ public class Proposta {
 
     private BigDecimal salario;
 
+    @Enumerated(EnumType.STRING)
+    private StatusProposta statusProposta;
+
     @Deprecated
     public Proposta() {
     }
@@ -34,5 +39,17 @@ public class Proposta {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setStatusProposta(StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
     }
 }
