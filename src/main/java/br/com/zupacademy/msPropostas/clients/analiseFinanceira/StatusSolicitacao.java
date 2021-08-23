@@ -1,4 +1,4 @@
-package br.com.zupacademy.msPropostas.clients.status;
+package br.com.zupacademy.msPropostas.clients.analiseFinanceira;
 
 public enum StatusSolicitacao {
 

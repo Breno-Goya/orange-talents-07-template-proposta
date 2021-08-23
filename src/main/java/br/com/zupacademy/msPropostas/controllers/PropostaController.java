@@ -1,9 +1,9 @@
 package br.com.zupacademy.msPropostas.controllers;
 
-import br.com.zupacademy.msPropostas.clients.AnaliseRequest;
-import br.com.zupacademy.msPropostas.clients.AnaliseResponse;
-import br.com.zupacademy.msPropostas.clients.ApiAnaliseFinanceira;
-import br.com.zupacademy.msPropostas.clients.status.StatusSolicitacao;
+import br.com.zupacademy.msPropostas.clients.analiseFinanceira.AnaliseRequest;
+import br.com.zupacademy.msPropostas.clients.analiseFinanceira.AnaliseResponse;
+import br.com.zupacademy.msPropostas.clients.analiseFinanceira.ApiAnaliseFinanceira;
+import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusSolicitacao;
 import br.com.zupacademy.msPropostas.entities.Proposta;
 import br.com.zupacademy.msPropostas.exceptions.ApiRequestException;
 import br.com.zupacademy.msPropostas.repositories.PropostaRepository;

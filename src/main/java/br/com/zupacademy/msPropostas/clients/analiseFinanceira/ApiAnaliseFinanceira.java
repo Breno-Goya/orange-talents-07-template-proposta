@@ -1,4 +1,4 @@
-package br.com.zupacademy.msPropostas.clients;
+package br.com.zupacademy.msPropostas.clients.analiseFinanceira;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

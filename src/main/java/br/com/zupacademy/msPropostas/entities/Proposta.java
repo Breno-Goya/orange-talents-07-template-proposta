@@ -1,6 +1,6 @@
 package br.com.zupacademy.msPropostas.entities;
 
-import br.com.zupacademy.msPropostas.clients.status.StatusProposta;
+import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusProposta;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

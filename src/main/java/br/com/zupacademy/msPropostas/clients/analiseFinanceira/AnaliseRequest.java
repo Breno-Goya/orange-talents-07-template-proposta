@@ -1,4 +1,4 @@
-package br.com.zupacademy.msPropostas.clients;
+package br.com.zupacademy.msPropostas.clients.analiseFinanceira;
 
 import br.com.zupacademy.msPropostas.entities.Proposta;
 

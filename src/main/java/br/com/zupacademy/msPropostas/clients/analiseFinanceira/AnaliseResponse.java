@@ -1,6 +1,4 @@
-package br.com.zupacademy.msPropostas.clients;
-
-import br.com.zupacademy.msPropostas.clients.status.StatusSolicitacao;
+package br.com.zupacademy.msPropostas.clients.analiseFinanceira;
 
 public class AnaliseResponse {
 
