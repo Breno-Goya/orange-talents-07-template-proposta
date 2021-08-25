@@ -8,14 +8,12 @@ import br.com.zupacademy.msPropostas.entities.Proposta;
 import br.com.zupacademy.msPropostas.exceptions.ApiRequestException;
 import br.com.zupacademy.msPropostas.repositories.PropostaRepository;
 import br.com.zupacademy.msPropostas.requests.PropostaRequest;
+import br.com.zupacademy.msPropostas.response.PropostaResponse;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
@@ -78,4 +76,13 @@ public class PropostaController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PropostaResponse> listaPropostaPorId (@PathVariable Long id) {
+        Optional<Proposta> possivelProposta = repository.findById(id);
+        if (possivelProposta.isPresent()) {
+            Proposta proposta = possivelProposta.get();
+            return ResponseEntity.ok(new PropostaResponse(proposta));
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

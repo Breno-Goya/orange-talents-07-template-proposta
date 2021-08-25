@@ -60,4 +60,20 @@ public class Proposta {
     public void associaCartao(Cartao cartao) {
         this.cartao = cartao;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
+    }
 }
