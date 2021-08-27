@@ -1,5 +1,7 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
+import br.com.zupacademy.msPropostas.entities.Biometria;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -43,6 +45,9 @@ public class Cartao {
 
     private String idProposta;
 
+    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST})
+    private Set<Biometria> biometrias;
+
     @Deprecated
     public Cartao() {
     }
@@ -77,5 +82,9 @@ public class Cartao {
 
     public String getNumeroCartao() {
         return this.numeroCartao;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
