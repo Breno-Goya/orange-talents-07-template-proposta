@@ -20,17 +20,17 @@ analise.financeira.endpoint=${API_FINANCEIRA_ENDPOINT:/api/solicitacao}
 periodicidade.associa.cartao=${PERIODICIDADE_ASSOCIA_CARTAO:180000}
 
 
-# Tempo m√°ximo de resposta para as requisi√ß√µes usando feign
+# Tempo m·ximo de resposta para as requisiÁıes usando feign
 
 feign.client.config.analisefinanceira-api.read-timeout=100
 
 # Actuator
-# Endpoints - Health e M√©tricas
+# Endpoints - Health e MÈtricas
 
 management.endpoints.web.exposure.include=health, metrics, info
 
 management.endpoint.health.show-details=always
 
-# Remove os endpoints sobre vari√°vies de ambiente e beans do sistema
+# Remove os endpoints sobre vari·vies de ambiente e beans do sistema
 
 management.endpoints.web.exposure.exclude=env, beans
