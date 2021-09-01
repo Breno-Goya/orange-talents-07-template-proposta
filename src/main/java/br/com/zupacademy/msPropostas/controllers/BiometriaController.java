@@ -30,7 +30,7 @@ public class BiometriaController {
        Biometria biometria = request.toModel(cartaoId, cartaoRepository);
        biometriaRepository.save(biometria);
 
-        URI uri = uriComponentsBuilder.path("/biometrias/{cartaoId/{id}").buildAndExpand(biometria.getCartao().getId(), biometria.getId()).toUri();
+        URI uri = uriComponentsBuilder.path("/biometrias/{cartaoId}/{id}").buildAndExpand(biometria.getCartao().getId(), biometria.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 }

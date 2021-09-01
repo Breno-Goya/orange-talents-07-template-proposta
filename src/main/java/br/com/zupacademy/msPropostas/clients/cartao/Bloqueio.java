@@ -10,12 +10,11 @@ public class Bloqueio {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String apiId;
-
     private LocalDateTime bloqueadoEm;
-    private String sistemaReponsavel;
-    private Boolean ativo;
+
+    private String ip;
+
+    private String userAgent;
 
     @ManyToOne
     private Cartao cartao;
@@ -23,11 +22,11 @@ public class Bloqueio {
     @Deprecated
     public Bloqueio() {}
 
-    public Bloqueio(BloqueioResponse response) {
-        this.apiId = response.getApiId();
-        this.bloqueadoEm = response.getBloqueadoEm();
-        this.sistemaReponsavel = response.getSistemaResponsavel();
-        this.ativo = response.isAtivo();
+    public Bloqueio(String ip, String userAgent, Cartao cartao) {
+        this.bloqueadoEm = LocalDateTime.now();
+        this.ip = ip;
+        this.userAgent = userAgent;
+        this.cartao = cartao;
     }
 
     @Override

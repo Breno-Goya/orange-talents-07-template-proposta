@@ -23,7 +23,7 @@ public class Cartao {
 
     private String titular;
 
-    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "cartao")
     private Set<Bloqueio> bloqueios;
 
     @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -48,6 +48,9 @@ public class Cartao {
     @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST})
     private Set<Biometria> biometrias;
 
+    @Enumerated(EnumType.STRING)
+    private StatusCartao statusCartao;
+
     @Deprecated
     public Cartao() {
     }
@@ -58,9 +61,7 @@ public class Cartao {
         this.titular = response.getTitular();
         this.limite = response.getLimite();
         this.emitidoEm = response.getEmitidoEm();
-
-        if(!response.getBloqueios().isEmpty())
-            this.bloqueios = response.getBloqueios().stream().map(Bloqueio::new).collect(Collectors.toSet());
+        this.statusCartao = StatusCartao.ATIVO;
 
         if(!response.getAvisos().isEmpty())
             this.avisos = response.getAvisos().stream().map(AvisoViagem::new).collect(Collectors.toSet());
@@ -80,8 +81,8 @@ public class Cartao {
         this.idProposta = response.getIdProposta();
     }
 
-    public String getNumeroCartao() {
-        return this.numeroCartao;
+    public void bloquiaCartao() {
+        this.statusCartao = StatusCartao.BLOQUEADO;
     }
 
     public Long getId() {
