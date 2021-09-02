@@ -20,6 +20,9 @@ public class CarteiraDigital {
     @ManyToOne
     private Cartao cartao;
 
+    @Deprecated
+    public CarteiraDigital() {}
+
     public CarteiraDigital(CarteiraDigitalResponse response) {
         this.apiId = response.getId();
         this.email = response.getEmail();

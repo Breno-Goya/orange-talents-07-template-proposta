@@ -81,11 +81,19 @@ public class Cartao {
         this.idProposta = response.getIdProposta();
     }
 
-    public void bloquiaCartao() {
+    public void bloqueiaCartao() {
         this.statusCartao = StatusCartao.BLOQUEADO;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getNumeroCartao() {
+        return numeroCartao;
+    }
+
+    public Boolean isCartaoBloqueado(){
+         return this.statusCartao.equals(StatusCartao.BLOQUEADO);
     }
 }

@@ -2,6 +2,7 @@ package br.com.zupacademy.msPropostas.controllers;
 
 import br.com.zupacademy.msPropostas.clients.cartao.Bloqueio;
 import br.com.zupacademy.msPropostas.clients.cartao.Cartao;
+import br.com.zupacademy.msPropostas.clients.cartao.CartaoService;
 import br.com.zupacademy.msPropostas.repositories.BloqueioCartaoRepository;
 import br.com.zupacademy.msPropostas.repositories.CartaoRepository;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ public class BloqueioCartaoController {
 
     private final BloqueioCartaoRepository bloqueioCartaoRepository;
     private final CartaoRepository cartaoRepository;
+    private final CartaoService cartaoService;
 
-    public BloqueioCartaoController(BloqueioCartaoRepository bloqueioCartaoRepository, CartaoRepository cartaoRepository) {
+    public BloqueioCartaoController(BloqueioCartaoRepository bloqueioCartaoRepository, CartaoRepository cartaoRepository, CartaoService cartaoService) {
         this.bloqueioCartaoRepository = bloqueioCartaoRepository;
         this.cartaoRepository = cartaoRepository;
+        this.cartaoService = cartaoService;
     }
 
     @PostMapping("/{idCartao}")
@@ -42,11 +45,10 @@ public class BloqueioCartaoController {
             if (possivelBloqueio.isPresent()) return ResponseEntity.unprocessableEntity().build();
 
             Cartao cartao = possivelCartao.get();
-            cartao.bloquiaCartao();
 
-            Bloqueio bloqueio = new Bloqueio(xForwardFor,userAgent,cartao);
+            cartaoService.bloqueiaCartao(cartao, xForwardFor, userAgent);
 
-            bloqueioCartaoRepository.save(bloqueio);
+            if(!cartao.isCartaoBloqueado()) return ResponseEntity.badRequest().build();
 
             return ResponseEntity.ok().build();
         }

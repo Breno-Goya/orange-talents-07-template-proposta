@@ -2,6 +2,7 @@ package br.com.zupacademy.msPropostas.clients.cartao;
 
 import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusProposta;
 import br.com.zupacademy.msPropostas.entities.Proposta;
+import br.com.zupacademy.msPropostas.repositories.CartaoRepository;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +17,14 @@ import java.util.List;
 
 @Component
 @EnableScheduling
-public class AssociaCartaoService {
+public class CartaoService {
 
-    Logger logger = LoggerFactory.getLogger(AssociaCartaoService.class);
+    Logger logger = LoggerFactory.getLogger(CartaoService.class);
 
     private final ApiCartao apiCartao;
     private final EntityManager entityManager;
 
-    public AssociaCartaoService(ApiCartao apiCartao, EntityManager entityManager) {
+    public CartaoService(ApiCartao apiCartao, EntityManager entityManager, CartaoRepository cartaoRepository) {
         this.apiCartao = apiCartao;
         this.entityManager = entityManager;
     }
@@ -53,6 +54,23 @@ public class AssociaCartaoService {
                 e.printStackTrace();
             }
         });
+    }
+
+    @Transactional
+    public void bloqueiaCartao(Cartao cartao, String xForwardFor, String userAgent) {
+
+        try {
+            AvisoBloqueioResponse response = apiCartao.bloqueioCartao(cartao.getNumeroCartao(), new AvisoBloqueioRequest("aplicação-propostas"));
+            Bloqueio bloqueio = new Bloqueio(xForwardFor, userAgent, cartao);
+            cartao.bloqueiaCartao();
+            entityManager.persist(bloqueio);
+            logger.info("method=bloquiaCartao, msg= Status atual do cartão: {}", response.getResultado());
+
+        } catch (FeignException.UnprocessableEntity feu) {
+            logger.error("method=bloqueiaCartao, msg=Cartão de número: {} , já esta bloqueado", cartao.getNumeroCartao());
+        }catch (FeignException fe) {
+            logger.error("method=bloqueiaCartao, msg=Cartão não bloqueado numero: {}", cartao.getNumeroCartao());
+        }
     }
 }
 
