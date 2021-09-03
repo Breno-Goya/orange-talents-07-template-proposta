@@ -1,4 +1,4 @@
-package br.com.zupacademy.msPropostas.clients.cartao;
+package br.com.zupacademy.msPropostas.clients.bloqueio;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

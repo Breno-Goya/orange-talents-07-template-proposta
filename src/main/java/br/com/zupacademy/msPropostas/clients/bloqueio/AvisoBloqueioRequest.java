@@ -1,4 +1,4 @@
-package br.com.zupacademy.msPropostas.clients.cartao;
+package br.com.zupacademy.msPropostas.clients.bloqueio;
 
 public class AvisoBloqueioRequest {
 

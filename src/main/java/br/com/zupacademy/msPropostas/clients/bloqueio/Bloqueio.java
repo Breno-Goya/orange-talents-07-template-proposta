@@ -1,4 +1,6 @@
-package br.com.zupacademy.msPropostas.clients.cartao;
+package br.com.zupacademy.msPropostas.clients.bloqueio;
+
+import br.com.zupacademy.msPropostas.clients.cartao.Cartao;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,6 +1,9 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
 import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusProposta;
+import br.com.zupacademy.msPropostas.clients.bloqueio.AvisoBloqueioRequest;
+import br.com.zupacademy.msPropostas.clients.bloqueio.AvisoBloqueioResponse;
+import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
 import br.com.zupacademy.msPropostas.entities.Proposta;
 import br.com.zupacademy.msPropostas.repositories.CartaoRepository;
 import feign.FeignException;
@@ -8,14 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Component
+@Service
 @EnableScheduling
 public class CartaoService {
 

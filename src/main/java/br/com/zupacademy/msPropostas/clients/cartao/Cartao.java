@@ -1,5 +1,7 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
+import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagem;
+import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
 import br.com.zupacademy.msPropostas.entities.Biometria;
 
 import javax.persistence.*;
@@ -26,7 +28,7 @@ public class Cartao {
     @OneToMany(mappedBy = "cartao")
     private Set<Bloqueio> bloqueios;
 
-    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "cartao")
     private Set<AvisoViagem> avisos;
 
     @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -62,9 +64,6 @@ public class Cartao {
         this.limite = response.getLimite();
         this.emitidoEm = response.getEmitidoEm();
         this.statusCartao = StatusCartao.ATIVO;
-
-        if(!response.getAvisos().isEmpty())
-            this.avisos = response.getAvisos().stream().map(AvisoViagem::new).collect(Collectors.toSet());
 
         if (!response.getCarteiras().isEmpty())
             this.carteiras = response.getCarteiras().stream().map(CarteiraDigital::new).collect(Collectors.toSet());

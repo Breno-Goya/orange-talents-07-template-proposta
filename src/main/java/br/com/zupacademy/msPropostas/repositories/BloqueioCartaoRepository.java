@@ -1,6 +1,6 @@
 package br.com.zupacademy.msPropostas.repositories;
 
-import br.com.zupacademy.msPropostas.clients.cartao.Bloqueio;
+import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

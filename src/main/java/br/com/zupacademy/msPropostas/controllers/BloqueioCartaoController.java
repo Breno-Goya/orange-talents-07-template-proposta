@@ -1,6 +1,6 @@
 package br.com.zupacademy.msPropostas.controllers;
 
-import br.com.zupacademy.msPropostas.clients.cartao.Bloqueio;
+import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
 import br.com.zupacademy.msPropostas.clients.cartao.Cartao;
 import br.com.zupacademy.msPropostas.clients.cartao.CartaoService;
 import br.com.zupacademy.msPropostas.repositories.BloqueioCartaoRepository;
