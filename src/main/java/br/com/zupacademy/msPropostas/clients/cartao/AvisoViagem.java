@@ -1,8 +1,7 @@
-package br.com.zupacademy.msPropostas.clients.avisoviagem;
-
-import br.com.zupacademy.msPropostas.clients.cartao.Cartao;
+package br.com.zupacademy.msPropostas.clients.cartao;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,9 +18,12 @@ public class AvisoViagem {
     private String ip;
     private String userAgent;
 
-
     @ManyToOne
+    @NotNull
     private Cartao cartao;
+
+    @Deprecated
+    public AvisoViagem() {}
 
     public AvisoViagem(String destino, String ip, String userAgent, LocalDate validoAte, Cartao cartao) {
         this.destino = destino;
@@ -32,13 +34,17 @@ public class AvisoViagem {
         this.criadoEm = LocalDateTime.now();
     }
 
-//    public String getIp() {
-//        return ip;
-//    }
-//
-//    public String getUserAgent() {
-//        return userAgent;
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getValidoAte() {
+        return validoAte;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
 
     @Override
     public boolean equals(Object o) {

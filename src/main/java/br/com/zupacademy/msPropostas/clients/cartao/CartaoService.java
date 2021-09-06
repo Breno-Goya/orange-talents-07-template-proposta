@@ -1,6 +1,8 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
 import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusProposta;
+import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagemRequest;
+import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagemResponse;
 import br.com.zupacademy.msPropostas.clients.bloqueio.AvisoBloqueioRequest;
 import br.com.zupacademy.msPropostas.clients.bloqueio.AvisoBloqueioResponse;
 import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
@@ -64,9 +66,9 @@ public class CartaoService {
 
         try {
             AvisoBloqueioResponse response = apiCartao.bloqueioCartao(cartao.getNumeroCartao(), new AvisoBloqueioRequest("aplicação-propostas"));
-            Bloqueio bloqueio = new Bloqueio(xForwardFor, userAgent, cartao);
-            cartao.bloqueiaCartao();
-            entityManager.persist(bloqueio);
+            cartao.bloqueiaCartao(new Bloqueio(xForwardFor, userAgent, cartao));
+            entityManager.merge(cartao);
+
             logger.info("method=bloquiaCartao, msg= Status atual do cartão: {}", response.getResultado());
 
         } catch (FeignException.UnprocessableEntity feu) {

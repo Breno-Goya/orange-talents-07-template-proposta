@@ -1,6 +1,5 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
-import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagem;
 import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
 import br.com.zupacademy.msPropostas.entities.Biometria;
 
@@ -25,10 +24,10 @@ public class Cartao {
 
     private String titular;
 
-    @OneToMany(mappedBy = "cartao")
+    @OneToMany(mappedBy = "cartao", cascade = CascadeType.MERGE)
     private Set<Bloqueio> bloqueios;
 
-    @OneToMany(mappedBy = "cartao")
+    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<AvisoViagem> avisos;
 
     @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -47,7 +46,7 @@ public class Cartao {
 
     private String idProposta;
 
-    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "cartao")
     private Set<Biometria> biometrias;
 
     @Enumerated(EnumType.STRING)
@@ -80,8 +79,9 @@ public class Cartao {
         this.idProposta = response.getIdProposta();
     }
 
-    public void bloqueiaCartao() {
+    public void bloqueiaCartao(Bloqueio bloqueio) {
         this.statusCartao = StatusCartao.BLOQUEADO;
+        this.bloqueios.add(bloqueio);
     }
 
     public Long getId() {
@@ -94,5 +94,22 @@ public class Cartao {
 
     public Boolean isCartaoBloqueado(){
          return this.statusCartao.equals(StatusCartao.BLOQUEADO);
+    }
+
+    public void avisaViagem(AvisoViagem avisoViagem) {
+        this.avisos.add(avisoViagem);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cartao cartao = (Cartao) o;
+        return Objects.equals(id, cartao.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

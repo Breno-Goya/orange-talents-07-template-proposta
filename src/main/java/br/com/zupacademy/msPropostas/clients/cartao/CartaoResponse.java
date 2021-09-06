@@ -45,9 +45,9 @@ public class CartaoResponse {
         return titular;
     }
 
-    public Set<AvisoViagemRequest> getAvisos() {
-        return avisos;
-    }
+//    public Set<AvisoViagemRequest> getAvisos() {
+//        return avisos;
+//    }
 
     public Set<CarteiraDigitalResponse> getCarteiras() {
         return carteiras;
