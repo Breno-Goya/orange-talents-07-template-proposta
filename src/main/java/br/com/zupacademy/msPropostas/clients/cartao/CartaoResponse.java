@@ -1,6 +1,7 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
 import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagemRequest;
+import br.com.zupacademy.msPropostas.clients.carteiras.CarteiraDigitalResponseApiExterna;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ public class CartaoResponse {
     private LocalDateTime emitidoEm;
     private String titular;
     private Set<AvisoViagemRequest> avisos;
-    private Set<CarteiraDigitalResponse> carteiras;
+    private Set<CarteiraDigitalResponseApiExterna> carteiras;
     private Set<ParcelaResponse> parcelas;
     private BigDecimal limite;
     private RenegociacaoResponse renegociacao;
@@ -20,7 +21,7 @@ public class CartaoResponse {
 
     private String idProposta;
 
-    public CartaoResponse(String id, LocalDateTime emitidoEm, String titular, Set<AvisoViagemRequest> avisos, Set<CarteiraDigitalResponse> carteiras, Set<ParcelaResponse> parcelas, BigDecimal limite, RenegociacaoResponse renegociacao, VencimentoResponse vecimento, String idProposta) {
+    public CartaoResponse(String id, LocalDateTime emitidoEm, String titular, Set<AvisoViagemRequest> avisos, Set<CarteiraDigitalResponseApiExterna> carteiras, Set<ParcelaResponse> parcelas, BigDecimal limite, RenegociacaoResponse renegociacao, VencimentoResponse vecimento, String idProposta) {
         this.id = id;
         this.emitidoEm = emitidoEm;
         this.titular = titular;
@@ -49,7 +50,7 @@ public class CartaoResponse {
 //        return avisos;
 //    }
 
-    public Set<CarteiraDigitalResponse> getCarteiras() {
+    public Set<CarteiraDigitalResponseApiExterna> getCarteiras() {
         return carteiras;
     }
 

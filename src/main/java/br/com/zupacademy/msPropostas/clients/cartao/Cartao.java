@@ -1,9 +1,11 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
 import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
+import br.com.zupacademy.msPropostas.clients.carteiras.CarteiraDigital;
 import br.com.zupacademy.msPropostas.entities.Biometria;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -64,9 +66,6 @@ public class Cartao {
         this.emitidoEm = response.getEmitidoEm();
         this.statusCartao = StatusCartao.ATIVO;
 
-        if (!response.getCarteiras().isEmpty())
-            this.carteiras = response.getCarteiras().stream().map(CarteiraDigital::new).collect(Collectors.toSet());
-
         if (!response.getParcelas().isEmpty())
             this.parcelas = response.getParcelas().stream().map(Parcela::new).collect(Collectors.toSet());
 
@@ -100,16 +99,20 @@ public class Cartao {
         this.avisos.add(avisoViagem);
     }
 
+    public Boolean adicionaCarteira (CarteiraDigital carteira) {
+        return this.carteiras.add(carteira);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cartao cartao = (Cartao) o;
-        return Objects.equals(id, cartao.id);
+        return Objects.equals(numeroCartao, cartao.numeroCartao);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(numeroCartao);
     }
 }
