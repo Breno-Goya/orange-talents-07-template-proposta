@@ -1,13 +1,10 @@
 package br.com.zupacademy.msPropostas.clients.cartao;
 
 import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusProposta;
-import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagemRequest;
-import br.com.zupacademy.msPropostas.clients.avisoviagem.AvisoViagemResponse;
 import br.com.zupacademy.msPropostas.clients.bloqueio.AvisoBloqueioRequest;
 import br.com.zupacademy.msPropostas.clients.bloqueio.AvisoBloqueioResponse;
 import br.com.zupacademy.msPropostas.clients.bloqueio.Bloqueio;
 import br.com.zupacademy.msPropostas.entities.Proposta;
-import br.com.zupacademy.msPropostas.repositories.CartaoRepository;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +26,7 @@ public class CartaoService {
     private final ApiCartao apiCartao;
     private final EntityManager entityManager;
 
-    public CartaoService(ApiCartao apiCartao, EntityManager entityManager, CartaoRepository cartaoRepository) {
+    public CartaoService(ApiCartao apiCartao, EntityManager entityManager) {
         this.apiCartao = apiCartao;
         this.entityManager = entityManager;
     }
