@@ -20,9 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/cartoes/**").hasAuthority("SCOPE_escopo-proposta")
                 .antMatchers(HttpMethod.POST, "/biometrias/**").hasAuthority("SCOPE_escopo-proposta")
                 .antMatchers(HttpMethod.POST, "/bloqueios/**").hasAuthority("SCOPE_escopo-proposta")
-                .antMatchers(HttpMethod.GET, "/actuator/**").hasAuthority("SCOPE_escopo-proposta")
                 .antMatchers(HttpMethod.POST, "/api/**").hasAuthority("SCOPE_escopo-proposta")
-
+                .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                 .anyRequest().authenticated()).oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

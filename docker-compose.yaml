@@ -34,15 +34,20 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: propostas
 
-#  proposta-webservice:
-#    container_name: webservice
-#    image: brenogoya/propostas
-#    ports:
-#      - 8081:8080
-#    environment:
-#      DB_URL: jdbc:postgresql://data_base_propostas_local:5432/propostas
-#    depends_on:
-#      - postgres-propostas
+  proposta-webservice:
+    container_name: webservice
+    image: brenogoya/propostas
+    ports:
+      - 8080:8080
+    environment:
+      DB_URL: jdbc:postgresql://data_base_propostas_local:5432/propostas
+      API_FINANCEIRA_URL: 'http://analise:9999/'
+      API_CONTA_URL: 'http://contas:8888/'
+      DB_URL: 'jdbc:postgresql://data_base_propostas_local:5432/propostas'
+      JAEGER_ENDPOINT: 'http://jaeger:14268/api/traces'
+
+    depends_on:
+      - postgres-propostas
 
   postgres:
     image: 'postgres:alpine'
@@ -133,7 +138,7 @@ services:
   prometheus:
     image: prom/prometheus:v2.22.0
     volumes:
-      #- ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-volume:/etc/prometheus/
     ports:
       - "9090:9090"
