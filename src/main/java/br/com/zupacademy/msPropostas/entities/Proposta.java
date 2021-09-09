@@ -2,8 +2,11 @@ package br.com.zupacademy.msPropostas.entities;
 
 import br.com.zupacademy.msPropostas.clients.analiseFinanceira.StatusProposta;
 import br.com.zupacademy.msPropostas.clients.cartao.Cartao;
+import br.com.zupacademy.msPropostas.utils.Encryption;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Entity
@@ -12,9 +15,15 @@ public class Proposta {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @NotBlank
+    @Column(nullable = false)
     private String documento;
 
+    @NotBlank
+    @Column(nullable = false)
+    private String documentoHash;
+
+    @Email @NotBlank @Column(nullable = false)
     private String email;
 
     private String nome;
@@ -33,8 +42,10 @@ public class Proposta {
     public Proposta() {
     }
 
-    public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario) {
-        this.documento = documento;
+    public Proposta(String documentoTextoLimpo, String email, String nome, String endereco, BigDecimal salario) {
+        Encryption encryptDocumento = Encryption.getInstance();
+        this.documento = encryptDocumento.encrypt(documentoTextoLimpo);
+        this.documentoHash = encryptDocumento.hashGenerate(documentoTextoLimpo);
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;
@@ -46,7 +57,8 @@ public class Proposta {
     }
 
     public String getDocumento() {
-        return documento;
+        Encryption encrypt = Encryption.getInstance();
+        return encrypt.decipher(documento);
     }
 
     public String getNome() {

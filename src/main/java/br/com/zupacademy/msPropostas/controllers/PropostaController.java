@@ -26,10 +26,10 @@ import java.util.Optional;
 @RequestMapping("/propostas")
 public class PropostaController {
 
-    private PropostaRepository repository;
-    private ApiAnaliseFinanceira apiAnaliseFinanceira;
+    private  final PropostaRepository repository;
+    private final ApiAnaliseFinanceira apiAnaliseFinanceira;
 
-    private Logger logger = LoggerFactory.getLogger(PropostaController.class);
+    private final Logger logger = LoggerFactory.getLogger(PropostaController.class);
 
     public PropostaController(PropostaRepository repository, ApiAnaliseFinanceira apiAnaliseFinanceira) {
         this.repository = repository;
@@ -48,7 +48,7 @@ public class PropostaController {
             throw new ApiRequestException("Esse documento já foi cadastrado");
         }
 
-        Proposta proposta = request.convertToModel();
+        Proposta proposta = request.convertToModel(repository);
         repository.save(proposta);
 
         verificaSolicitacaoFinanceira(proposta);

@@ -1,6 +1,9 @@
 package br.com.zupacademy.msPropostas.requests;
 
 import br.com.zupacademy.msPropostas.entities.Proposta;
+import br.com.zupacademy.msPropostas.exceptions.ApiRequestException;
+import br.com.zupacademy.msPropostas.repositories.PropostaRepository;
+import br.com.zupacademy.msPropostas.utils.Encryption;
 import br.com.zupacademy.msPropostas.validations.CPForCNPJ;
 
 import javax.validation.constraints.Email;
@@ -35,11 +38,16 @@ public class PropostaRequest {
         this.salario = salario;
     }
 
-    public Proposta convertToModel() {
-        return new Proposta(documento, email, nome, endereco, salario);
-    }
-
     public String getDocumento() {
         return documento;
+    }
+
+    public Proposta convertToModel(PropostaRepository repository) throws ApiRequestException {
+
+        String documentoHash = Encryption.getInstance().hashGenerate(documento);
+
+        if(repository.existsByDocumentoHash(documentoHash))
+            throw new ApiRequestException("Esse documento já possui proposta");
+        return new Proposta(documento, email, nome, endereco, salario);
     }
 }

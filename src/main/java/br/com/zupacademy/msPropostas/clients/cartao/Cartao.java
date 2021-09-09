@@ -5,7 +5,6 @@ import br.com.zupacademy.msPropostas.clients.carteiras.CarteiraDigital;
 import br.com.zupacademy.msPropostas.entities.Biometria;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -29,10 +28,10 @@ public class Cartao {
     @OneToMany(mappedBy = "cartao", cascade = CascadeType.MERGE)
     private Set<Bloqueio> bloqueios;
 
-    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "cartao", cascade = CascadeType.MERGE)
     private Set<AvisoViagem> avisos;
 
-    @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "cartao")
     private Set<CarteiraDigital> carteiras;
 
     @OneToMany(mappedBy = "cartao", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
